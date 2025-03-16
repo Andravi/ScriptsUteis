@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "De nada"
+sleep 0.5
+kill -9 $PPID
