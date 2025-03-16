@@ -1,0 +1,52 @@
+#!/bin/bash
+############################################################
+# Help                                                     #
+############################################################
+Help()
+{
+   # Display Help
+   echo "Add description of the script functions here."
+   echo
+   echo "Syntax: scriptTemplate [-g|h|v|V]"
+   echo "options:"
+   echo "g     Print the GPL license notification."
+   echo "h     Print this Help."
+   echo "v     Verbose mode."
+   echo "V     Print software version and exit."
+   echo
+}
+
+############################################################
+############################################################
+# Main program                                             #
+############################################################
+############################################################
+############################################################
+# Process the input options. Add options as needed.        #
+############################################################
+# Get the options
+
+N="TEste"
+
+
+while getopts ":hf:" option; do
+   case $option in
+      h) # display Help
+         Help;;
+      
+      f) # Teste
+         N=$OPTARG
+         echo "Convertento $N para .mp4!"
+         path=`pwd`
+         ffmpeg -i $N.webm -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -c:v libx264 -crf 23 -c:a aac -movflags +faststart $N.mp4
+
+         echo "$OPTARG.mp4 Criado! ";;
+
+     \?) # Invalid option
+         echo "Error: Invalid option"
+         exit;;
+   esac
+done
+
+
+
