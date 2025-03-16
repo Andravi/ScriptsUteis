@@ -42,7 +42,7 @@ chmod +x meu_script
         ```
       - Adicione esta linha no final:
         ```bash
-        export PATH="$HOME/caminho/Até/A/Pasta/Que/Quiser}:$PATH"
+        export PATH="$HOME/caminho/Até/A/Pasta/Que/Quiser:$PATH"
         ```
       - Recarregue o shell:
         ```bash
