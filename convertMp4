@@ -29,6 +29,37 @@ Help()
 N="TEste"
 
 
+if [ $1 == '-t' ]; then
+
+   echo entrou;
+   # Talvez não seja a forma mais bonita
+   # for i in $(ls | grep "[.]"); do
+   #    echo "arquivo: $i";
+   # done;
+
+   # find . -maxdepth 1 -type f -printf '%f\n' | grep -v '^[.]';
+   for i in *; do
+      if [ -f "$i" ]; then
+         # echo $i;
+         if [[ "$i" == *webm ]]; then
+            ffmpeg -i "$i" -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" \
+            -c:v libx264 -crf 23 -preset fast \
+            -c:a aac -movflags +faststart "${i%.*}.mp4"   
+            rm "$i"
+            echo "$i Convertido para .mp4!"; 
+         fi;
+      fi;
+   done;
+
+
+
+
+   exit;
+fi
+
+
+
+
 while getopts ":hf:" option; do
    case $option in
       h) # display Help
@@ -42,7 +73,7 @@ while getopts ":hf:" option; do
 
          echo "$OPTARG.mp4 Criado! ";;
 
-     \?) # Invalid option
+      \?) # Invalid option
          echo "Error: Invalid option"
          exit;;
    esac
